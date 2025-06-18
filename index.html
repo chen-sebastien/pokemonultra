@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>汝之人格類型分析</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cinzel+Decorative:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cinzel', serif;
+            background: linear-gradient(135deg, 
+                #C4A57B 0%,   /* 溫暖的石材色 */
+                #D4B896 25%,  /* 淺沙色 */
+                #B5956F 50%,  /* 中性棕色 */
+                #A08660 75%,  /* 深沙色 */
+                #8B7355 100%  /* 深棕色 */
+            );
+            background-size: 400% 400%;
+            animation: medievalGradient 20s ease infinite;
+            min-height: 100vh;
+            color: #3A2F24;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* 中世紀紋理背景 */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 15% 25%, rgba(139, 115, 85, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 85% 75%, rgba(164, 134, 96, 0.12) 0%, transparent 35%),
+                radial-gradient(circle at 45% 60%, rgba(196, 165, 123, 0.08) 0%, transparent 45%),
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(139, 115, 85, 0.03) 2px,
+                    rgba(139, 115, 85, 0.03) 4px
+                );
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        @keyframes medievalGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+        }
+
+        /* 主要內容區域 */
+        .main-content {
+            background: rgba(243, 235, 220, 0.95);
+            border-radius: 20px;
+            box-shadow: 
+                0 20px 60px rgba(58, 47, 36, 0.3),
+                inset 0 0 40px rgba(196, 165, 123, 0.2);
+            backdrop-filter: blur(15px);
+            border: 3px solid rgba(164, 134, 96, 0.6);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 裝飾性頂部邊框 */
+        .main-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(90deg, 
+                #A48660, #C4A57B, #D4B896, #C4A57B, #A48660);
+            background-size: 200% 100%;
+            animation: borderFlow 8s linear infinite;
+        }
+
+        @keyframes borderFlow {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 200% 0%; }
+        }
+
+        .header {
+            text-align: center;
+            padding: 50px 30px 30px;
+            position: relative;
+            background: linear-gradient(135deg, 
+                rgba(196, 165, 123, 0.1), 
+                rgba(212, 184, 150, 0.1));
+        }
+
+        /* 角色圖片區域 */
+        .character-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .character-image {
+            width: 180px;
+            height: 240px;
+            background: linear-gradient(135deg, #8B7355, #A08660);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(243, 235, 220, 0.8);
+            font-size: 0.9em;
+            text-align: center;
+            border: 3px solid #C4A57B;
+            box-shadow: 0 10px 30px rgba(58, 47, 36, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .character-image::before {
+            content: '🎭';
+            font-size: 4em;
+            opacity: 0.3;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .title-section {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .title {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 3.2em;
+            font-weight: 900;
+            color: #5D4E3A;
+            text-shadow: 
+                2px 2px 4px rgba(164, 134, 96, 0.6),
+                0 0 20px rgba(139, 115, 85, 0.3);
+            margin-bottom: 15px;
+            position: relative;
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            font-size: 1.3em;
+            color: #6B5B47;
+            font-style: italic;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .description {
+            font-size: 1.1em;
+            color: #5D4E3A;
+            line-height: 1.7;
+            text-align: center;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        /* 裝飾分隔線 */
+        .medieval-divider {
+            text-align: center;
+            margin: 40px 0;
+            position: relative;
+        }
+
+        .medieval-divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                transparent, #A48660, #C4A57B, #A48660, transparent);
+            transform: translateY(-50%);
+        }
+
+        .medieval-divider .ornament {
+            display: inline-block;
+            background: rgba(243, 235, 220, 1);
+            padding: 0 20px;
+            font-size: 1.8em;
+            color: #A48660;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* 分析區域 */
+        .analysis-section {
+            margin: 40px 0;
+            padding: 35px;
+            background: linear-gradient(135deg, 
+                rgba(243, 235, 220, 0.9), 
+                rgba(233, 225, 210, 0.9));
+            border-radius: 20px;
+            border: 2px solid rgba(164, 134, 96, 0.5);
+            position: relative;
+            box-shadow: 0 15px 40px rgba(58, 47, 36, 0.15);
+        }
+
+        .section-title {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 2em;
+            color: #5D4E3A;
+            margin-bottom: 25px;
+            text-align: center;
+            text-shadow: 1px 1px 3px rgba(164, 134, 96, 0.4);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, #A48660, #C4A57B, #A48660);
+            border-radius: 2px;
+        }
+
+        .analysis-text {
+            font-size: 1.15em;
+            line-height: 1.9;
+            color: #4A3D2F;
+            text-align: justify;
+            text-indent: 2.5em;
+        }
+
+        /* 表格設計 */
+        .medieval-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 30px 0;
+            background: rgba(243, 235, 220, 0.95);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(58, 47, 36, 0.25);
+            border: 3px solid rgba(164, 134, 96, 0.6);
+        }
+
+        .medieval-table th {
+            background: linear-gradient(135deg, #8B7355, #A08660, #8B7355);
+            color: #F3EBDC;
+            padding: 25px 20px;
+            font-family: 'Cinzel Decorative', serif;
+            font-weight: 700;
+            font-size: 1.1em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+            border-bottom: 4px solid #C4A57B;
+            position: relative;
+        }
+
+        .medieval-table th:first-child {
+            border-top-left-radius: 17px;
+        }
+
+        .medieval-table th:last-child {
+            border-top-right-radius: 17px;
+        }
+
+        .medieval-table td {
+            padding: 22px 20px;
+            border-bottom: 1px solid rgba(164, 134, 96, 0.3);
+            vertical-align: top;
+            line-height: 1.7;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .medieval-table tr:nth-child(even) td {
+            background: rgba(212, 184, 150, 0.2);
+        }
+
+        .medieval-table tr:hover td {
+            background: rgba(196, 165, 123, 0.3);
+            transform: scale(1.01);
+            box-shadow: 0 5px 15px rgba(58, 47, 36, 0.1);
+        }
+
+        .dimension {
+            font-weight: 700;
+            color: #5D4E3A;
+            font-size: 1.15em;
+            font-family: 'Cinzel Decorative', serif;
+        }
+
+        /* 城鎮背景區域 */
+        .town-background {
+            height: 200px;
+            background: linear-gradient(135deg, 
+                #B5A088, #C4A57B, #D4B896);
+            border-radius: 15px;
+            margin: 30px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid rgba(164, 134, 96, 0.6);
+        }
+
+        .town-background::before {
+            content: '🏰';
+            font-size: 8em;
+            opacity: 0.3;
+            color: #8B7355;
+            position: absolute;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .town-text {
+            position: relative;
+            z-index: 1;
+            color: #5D4E3A;
+            text-align: center;
+            font-size: 1.2em;
+            font-style: italic;
+            text-shadow: 1px 1px 2px rgba(243, 235, 220, 0.8);
+        }
+
+        /* 響應式設計 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 10px;
+            }
+
+            .character-section {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .character-image {
+                width: 140px;
+                height: 180px;
+            }
+
+            .title {
+                font-size: 2.5em;
+            }
+
+            .medieval-table {
+                font-size: 0.9em;
+            }
+
+            .medieval-table th,
+            .medieval-table td {
+                padding: 15px 10px;
+            }
+
+            .content,
+            .header {
+                padding: 25px 20px;
+            }
+
+            .town-background {
+                height: 150px;
+            }
+
+            .town-background::before {
+                font-size: 5em;
+            }
+        }
+
+        /* 滾動條樣式 */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #C4A57B;
+            border-radius: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #8B7355, #A08660);
+            border-radius: 6px;
+            border: 2px solid #D4B896;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #6B5B47, #8B7355);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="main-content">
+            <div class="header">
+                <div class="character-section">
+                    <div class="character-image">
+                        <div style="position: relative; z-index: 1; text-align: center;">
+                            <div style="font-size: 1.1em; margin-bottom: 10px;">吟遊詩人</div>
+                            <div style="font-size: 0.9em; opacity: 0.8;">智慧的引導者</div>
+                        </div>
+                    </div>
+                    <div class="title-section">
+                        <h1 class="title">汝之人格類型分析</h1>
+                        <p class="subtitle">中世紀賢者之智慧解析</p>
+                        <p class="description">
+                            如古老城鎮中的智者，透過時光淬煉的智慧<br>
+                            窺探汝心靈之奧秘，洞察人性之真諦
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content">
+                <div class="town-background">
+                    <div class="town-text">
+                        「在古老的石牆間，每個靈魂都有其獨特的故事」
+                    </div>
+                </div>
+
+                <div class="medieval-divider">
+                    <span class="ornament">❦ ◊ ❦</span>
+                </div>
+
+                <div class="analysis-section">
+                    <h2 class="section-title">性格特質總覽</h2>
+                    <p class="analysis-text">
+                        具備快速啟動與情感連結優勢，但需留意決策穩定度與風險評估。
+                        透過情緒標定、里程碑機制、固定風險檢核即可顯著提升持續績效。
+                        如同中世紀城鎮中的商人，善於與人交流，但需要穩固的基石來支撐長遠的事業。
+                    </p>
+                </div>
+
+                <table class="medieval-table">
+                    <thead>
+                        <tr>
+                            <th>向度</th>
+                            <th>具體特徵</th>
+                            <th>可能優勢</th>
+                            <th>可能挑戰</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="dimension">感性</td>
+                            <td>情緒波動即時反映在行動，能快速察覺他人情緒</td>
+                            <td>具高度同理與氛圍感染力</td>
+                            <td>情緒化決策，穩定度需留意</td>
+                        </tr>
+                        <tr>
+                            <td class="dimension">隨性</td>
+                            <td>當下想法立即付諸實踐，不排斥臨時變動</td>
+                            <td>應變速度快，不僵化</td>
+                            <td>缺乏長程規劃，容易重工</td>
+                        </tr>
+                        <tr>
+                            <td class="dimension">依賴</td>
+                            <td>依賴互動取得安全感，樂於尋求他人建議</td>
+                            <td>擅長協同、凝聚共識</td>
+                            <td>獨立決策時易遲疑</td>
+                        </tr>
+                        <tr>
+                            <td class="dimension">冒險</td>
+                            <td>喜歡嘗試未知，對失敗容忍較高</td>
+                            <td>具探索與創新動能</td>
+                            <td>可能低估風險與成本</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="medieval-divider">
+                    <span class="ornament">❦ ◊ ❦</span>
+                </div>
+
+                <div class="analysis-section">
+                    <h2 class="section-title">深度性格剖析</h2>
+                    <p class="analysis-text">
+                        ESDA 型人格在面對任務時，往往由強烈的當下情緒驅動立即行動；他們不傾向預先設計周詳計畫，而是在現場依直覺快速調整路徑。對於人際互動具有高度需求，一旦獲得肯定便能火力全開，反之若缺乏支持則動能驟降。由於具備冒險精神，他們願意承擔未知風險並享受探索過程，能為團隊帶來活力與創新，但同時必須留意情緒化決策與風險評估不足所帶來的不穩定性。如同中世紀城鎮中的冒險家，充滿熱情與勇氣，但需要智慧的指引來避免不必要的風險。
+                    </p>
+                </div>
+
+                <div class="medieval-divider">
+                    <span class="ornament">❦ ◊ ❦</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
