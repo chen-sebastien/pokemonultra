@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>汝之人格類型分析</title>
+    <title>吟遊詩人 | ESDA人格分析報告</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cinzel+Decorative:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cinzel+Decorative:wght@400;700;900&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -15,7 +16,7 @@
         }
 
         body {
-            font-family: 'Cinzel', serif;
+            font-family: 'Cormorant Garamond', serif;
             background: linear-gradient(135deg, 
                 #C4A57B 0%,   /* 溫暖的石材色 */
                 #D4B896 25%,  /* 淺沙色 */
@@ -61,7 +62,7 @@
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 40px 20px;
             position: relative;
@@ -101,7 +102,7 @@
 
         .header {
             text-align: center;
-            padding: 50px 30px 30px;
+            padding: 40px 30px 20px;
             position: relative;
             background: linear-gradient(135deg, 
                 rgba(196, 165, 123, 0.1), 
@@ -113,41 +114,59 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             gap: 40px;
             flex-wrap: wrap;
         }
 
-        .character-image {
-            width: 180px;
-            height: 240px;
-            background: linear-gradient(135deg, #8B7355, #A08660);
+        .character-image-container {
+            width: 320px;
+            height: 420px;
+            position: relative;
             border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(58, 47, 36, 0.4);
+            border: 3px solid #C4A57B;
+            background: linear-gradient(135deg, #8B7355, #A08660);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: rgba(243, 235, 220, 0.8);
-            font-size: 0.9em;
-            text-align: center;
-            border: 3px solid #C4A57B;
-            box-shadow: 0 10px 30px rgba(58, 47, 36, 0.4);
-            position: relative;
-            overflow: hidden;
         }
 
-        .character-image::before {
-            content: '🎭';
+        .character-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .character-image:hover {
+            transform: scale(1.03);
+        }
+
+        .character-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: rgba(243, 235, 220, 0.8);
+            font-size: 1.2em;
+            text-align: center;
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+        }
+
+        .character-placeholder i {
             font-size: 4em;
-            opacity: 0.3;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            margin-bottom: 20px;
+            opacity: 0.5;
         }
 
         .title-section {
             flex: 1;
             min-width: 300px;
+            max-width: 600px;
         }
 
         .title {
@@ -163,6 +182,14 @@
             line-height: 1.2;
         }
 
+        .personality-type {
+            font-size: 1.8em;
+            color: #A52A2A;
+            margin: 10px 0;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 4px;
+        }
+
         .subtitle {
             font-size: 1.3em;
             color: #6B5B47;
@@ -176,6 +203,74 @@
             color: #5D4E3A;
             line-height: 1.7;
             text-align: center;
+        }
+
+        /* 人物介绍卡片 */
+        .character-info {
+            background: linear-gradient(135deg, 
+                rgba(243, 235, 220, 0.9), 
+                rgba(233, 225, 210, 0.9));
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px auto;
+            max-width: 900px;
+            border: 2px solid rgba(164, 134, 96, 0.5);
+            box-shadow: 0 15px 40px rgba(58, 47, 36, 0.15);
+        }
+
+        .character-title {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 2.2em;
+            color: #5D4E3A;
+            margin-bottom: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .character-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 3px;
+            background: linear-gradient(90deg, #A48660, #C4A57B, #A48660);
+            border-radius: 2px;
+        }
+
+        .character-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 25px;
+        }
+
+        .character-detail {
+            background: rgba(212, 184, 150, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid rgba(164, 134, 96, 0.3);
+        }
+
+        .detail-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3em;
+            color: #8B7355;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .detail-title i {
+            margin-right: 10px;
+            color: #A52A2A;
+        }
+
+        .detail-content {
+            font-size: 1.1em;
+            line-height: 1.7;
+            color: #4A3D2F;
         }
 
         .content {
@@ -352,6 +447,96 @@
             text-shadow: 1px 1px 2px rgba(243, 235, 220, 0.8);
         }
 
+        /* 情境卡片 */
+        .scenario-card {
+            background: linear-gradient(135deg, 
+                rgba(243, 235, 220, 0.9), 
+                rgba(233, 225, 210, 0.9));
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            border: 2px solid rgba(164, 134, 96, 0.5);
+            box-shadow: 0 15px 40px rgba(58, 47, 36, 0.15);
+        }
+
+        .scenario-title {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 1.8em;
+            color: #5D4E3A;
+            margin-bottom: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .scenario-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 3px;
+            background: linear-gradient(90deg, #A48660, #C4A57B, #A48660);
+            border-radius: 2px;
+        }
+
+        .scenario-subtitle {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4em;
+            color: #8B7355;
+            margin: 25px 0 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .scenario-subtitle i {
+            margin-right: 10px;
+            color: #A52A2A;
+        }
+
+        .scenario-content {
+            font-size: 1.1em;
+            line-height: 1.7;
+            color: #4A3D2F;
+            padding: 15px;
+            background: rgba(212, 184, 150, 0.1);
+            border-radius: 10px;
+            border-left: 3px solid #A48660;
+            margin: 15px 0;
+        }
+
+        /* 底部 */
+        footer {
+            text-align: center;
+            padding: 40px 0 20px;
+            color: #5D4E3A;
+            font-size: 1.1em;
+            font-family: 'Cinzel', serif;
+        }
+
+        .seal {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #8B7355, #A08660);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid #C4A57B;
+            box-shadow: 0 0 20px rgba(165, 42, 42, 0.4);
+            position: relative;
+        }
+
+        .seal::before {
+            content: "ESDA";
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 1.4em;
+            font-weight: 900;
+            color: #F3EBDC;
+            letter-spacing: 3px;
+        }
+
         /* 響應式設計 */
         @media (max-width: 768px) {
             .container {
@@ -363,9 +548,9 @@
                 gap: 20px;
             }
 
-            .character-image {
-                width: 140px;
-                height: 180px;
+            .character-image-container {
+                width: 280px;
+                height: 360px;
             }
 
             .title {
@@ -421,18 +606,57 @@
         <div class="main-content">
             <div class="header">
                 <div class="character-section">
-                    <div class="character-image">
-                        <div style="position: relative; z-index: 1; text-align: center;">
-                            <div style="font-size: 1.1em; margin-bottom: 10px;">吟遊詩人</div>
-                            <div style="font-size: 0.9em; opacity: 0.8;">智慧的引導者</div>
+                    <div class="character-image-container">
+                        <!-- 人物图片位置 -->
+                        <img src="pic.png" 
+                             alt="吟遊詩人" class="character-image">
+                        <div class="character-placeholder" style="display:none;">
+                            <i class="fas fa-user"></i>
+                            <div>請上傳人物圖片</div>
                         </div>
                     </div>
+                    
                     <div class="title-section">
-                        <h1 class="title">汝之人格類型分析</h1>
-                        <p class="subtitle">中世紀賢者之智慧解析</p>
+                        <h1 class="title">人格分析報告</h1>
+                        <div class="personality-type">ESDA — 暖心衝動者</div>
+                        <div class="subtitle">吟遊詩人 · 心靈的旅者</div>
                         <p class="description">
-                            如古老城鎮中的智者，透過時光淬煉的智慧<br>
-                            窺探汝心靈之奧秘，洞察人性之真諦
+                            如同古鎮行吟的詩琴手，<br>
+                            以情感點燃每一次相遇
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 快速概覽 -->
+            <div class="character-info">
+                <h2 class="character-title">快速概覽</h2>
+                <div class="character-details">
+                    <div class="character-detail">
+                        <h3 class="detail-title"><i class="fas fa-heart"></i> 情緒導向 (Emotional)</h3>
+                        <p class="detail-content">
+                            決策高度受情感驅動，能即時感知並回應他人氛圍。
+                        </p>
+                    </div>
+                    
+                    <div class="character-detail">
+                        <h3 class="detail-title"><i class="fas fa-compass"></i> 即興行為 (Spontaneous)</h3>
+                        <p class="detail-content">
+                            偏好臨場反應而非長程規劃，行動節奏敏捷。
+                        </p>
+                    </div>
+                    
+                    <div class="character-detail">
+                        <h3 class="detail-title"><i class="fas fa-users"></i> 人際依賴 (Dependent)</h3>
+                        <p class="detail-content">
+                            在互動與肯定中蓄積動力，缺乏回饋時效率驟降。
+                        </p>
+                    </div>
+                    
+                    <div class="character-detail">
+                        <h3 class="detail-title"><i class="fas fa-mountain"></i> 冒險取向 (Adventurous)</h3>
+                        <p class="detail-content">
+                            樂於嘗試未知，風險容忍度高，帶來創新與活力。
                         </p>
                     </div>
                 </div>
@@ -449,15 +673,20 @@
                     <span class="ornament">❦ ◊ ❦</span>
                 </div>
 
+                <!-- 詳細性格敘述 -->
                 <div class="analysis-section">
-                    <h2 class="section-title">性格特質總覽</h2>
+                    <h2 class="section-title">詳細性格敘述</h2>
                     <p class="analysis-text">
-                        具備快速啟動與情感連結優勢，但需留意決策穩定度與風險評估。
-                        透過情緒標定、里程碑機制、固定風險檢核即可顯著提升持續績效。
-                        如同中世紀城鎮中的商人，善於與人交流，但需要穩固的基石來支撐長遠的事業。
+                        ESDA 型在所有情境中以當下情緒為首要驅動；一旦感受到正面能量，便可瞬間啟動並投入行動。他們不熱衷預設劇本，而是在現場依直覺調整方向，善於把變動化成機會。強烈的人際需求讓他們在團體裡閃耀，但同時也使其易受評價牽動。冒險心驅使他們擁抱新鮮事物，為專案注入創意與突破；然而情緒化決策與低風險評估可能導致反覆修正。若能透過簡易情緒標定、里程碑式計畫與固定風險清單來校準，ESDA 將把熱情、創造力與即戰力發揮至最大值。
                     </p>
                 </div>
 
+                <div class="medieval-divider">
+                    <span class="ornament">❦ ◊ ❦</span>
+                </div>
+
+                <!-- 向度對照表 -->
+                <h2 class="section-title">向度對照表</h2>
                 <table class="medieval-table">
                     <thead>
                         <tr>
@@ -470,27 +699,27 @@
                     <tbody>
                         <tr>
                             <td class="dimension">感性</td>
-                            <td>情緒波動即時反映在行動，能快速察覺他人情緒</td>
-                            <td>具高度同理與氛圍感染力</td>
-                            <td>情緒化決策，穩定度需留意</td>
+                            <td>情緒波動立即反映行動</td>
+                            <td>同理與感染力強</td>
+                            <td>決策穩定度低</td>
                         </tr>
                         <tr>
                             <td class="dimension">隨性</td>
-                            <td>當下想法立即付諸實踐，不排斥臨時變動</td>
-                            <td>應變速度快，不僵化</td>
-                            <td>缺乏長程規劃，容易重工</td>
+                            <td>即興啟動、不拘流程</td>
+                            <td>高速應變、不僵化</td>
+                            <td>缺乏長期規劃</td>
                         </tr>
                         <tr>
                             <td class="dimension">依賴</td>
-                            <td>依賴互動取得安全感，樂於尋求他人建議</td>
-                            <td>擅長協同、凝聚共識</td>
-                            <td>獨立決策時易遲疑</td>
+                            <td>需要外部回饋支持</td>
+                            <td>善於協同與凝聚</td>
+                            <td>獨立判斷不足</td>
                         </tr>
                         <tr>
                             <td class="dimension">冒險</td>
-                            <td>喜歡嘗試未知，對失敗容忍較高</td>
-                            <td>具探索與創新動能</td>
-                            <td>可能低估風險與成本</td>
+                            <td>喜歡嘗試未知</td>
+                            <td>帶來創新與活力</td>
+                            <td>可能低估風險</td>
                         </tr>
                     </tbody>
                 </table>
@@ -499,17 +728,130 @@
                     <span class="ornament">❦ ◊ ❦</span>
                 </div>
 
+                <!-- 深度性格剖析 -->
                 <div class="analysis-section">
                     <h2 class="section-title">深度性格剖析</h2>
                     <p class="analysis-text">
-                        ESDA 型人格在面對任務時，往往由強烈的當下情緒驅動立即行動；他們不傾向預先設計周詳計畫，而是在現場依直覺快速調整路徑。對於人際互動具有高度需求，一旦獲得肯定便能火力全開，反之若缺乏支持則動能驟降。由於具備冒險精神，他們願意承擔未知風險並享受探索過程，能為團隊帶來活力與創新，但同時必須留意情緒化決策與風險評估不足所帶來的不穩定性。如同中世紀城鎮中的冒險家，充滿熱情與勇氣，但需要智慧的指引來避免不必要的風險。
+                        在團隊中，ESDA 往往充當「氣氛催化劑」。他們能洞察微妙情感脈絡，迅速以故事、幽默或行動調節整體士氣；一旦獲得肯定，更能以倍速輸出。反之，若環境缺乏回應或長期負面，動力會急遽下滑，並伴隨情緒波動。冒險傾向使其面對未知充滿熱情，適合早期原型驗證或需要高互動的場域；但在高成本、長週期專案中，需額外機制確保決策一致性與風險控管。
                     </p>
                 </div>
 
                 <div class="medieval-divider">
                     <span class="ornament">❦ ◊ ❦</span>
                 </div>
+
+                <!-- 行動建議 -->
+                <div class="analysis-section">
+                    <h2 class="section-title">行動建議</h2>
+                    <div class="character-details">
+                        <div class="character-detail">
+                            <h3 class="detail-title"><i class="fas fa-brain"></i> 情緒管理</h3>
+                            <p class="detail-content">
+                                每日簡短情緒標籤，重大決策前先自評情緒強度，再行動。
+                            </p>
+                        </div>
+                        
+                        <div class="character-detail">
+                            <h3 class="detail-title"><i class="fas fa-tasks"></i> 目標規劃</h3>
+                            <p class="detail-content">
+                                以里程碑切割長目標，每週聚焦三件核心任務並視覺化進度。
+                            </p>
+                        </div>
+                        
+                        <div class="character-detail">
+                            <h3 class="detail-title"><i class="fas fa-users"></i> 人際互動</h3>
+                            <p class="detail-content">
+                                設定固定「獨立決策日」鍛鍊自主，同時保留回饋窗口。
+                            </p>
+                        </div>
+                        
+                        <div class="character-detail">
+                            <h3 class="detail-title"><i class="fas fa-dice"></i> 風險控制</h3>
+                            <p class="detail-content">
+                                採 3-問風險清單（價值、成本、替代方案），行動前快速檢核。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="medieval-divider">
+                    <span class="ornament">❦ ◊ ❦</span>
+                </div>
+
+                <!-- 典型情境一 -->
+                <div class="scenario-card">
+                    <h2 class="scenario-title">典型情境一：情感支援騙局</h2>
+                    
+                    <h3 class="scenario-subtitle"><i class="fas fa-theater-masks"></i> 短劇</h3>
+                    <div class="scenario-content">
+                        晚上 11 點，一位「遠在國外的舊同學」忽然私訊你，說近來心情低落，只想找個能懂自己的人聊聊。兩週內，你們訊息從問候變成深夜傾訴，你感受到前所未有的連結。第三週，他提起自己投資失利臨時周轉不靈，含淚拜託你先匯三萬元度過難關，並附上一張看似真實的醫院帳單截圖。
+                    </div>
+                    
+                    <h3 class="scenario-subtitle"><i class="fas fa-shield-alt"></i> 預防建議</h3>
+                    <div class="character-details">
+                        <div class="character-detail">
+                            <p class="detail-content">
+                                冷卻 48 小時：任何金錢請求先暫停兩天；情緒退燒後再判斷。
+                            </p>
+                        </div>
+                        <div class="character-detail">
+                            <p class="detail-content">
+                                雙軌驗證：用視訊或多平台確認對方身分，不靠單一社群帳號。
+                            </p>
+                        </div>
+                        <div class="character-detail">
+                            <p class="detail-content">
+                                設定單筆上限：與家人或信任夥伴約定「未經討論，不單獨匯款超過 X 元」。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 典型情境二 -->
+                <div class="scenario-card">
+                    <h2 class="scenario-title">典型情境二：高收益冒險投資</h2>
+                    
+                    <h3 class="scenario-subtitle"><i class="fas fa-theater-masks"></i> 短劇</h3>
+                    <div class="scenario-content">
+                        你在戶外音樂節認識一位熱情的「區塊鏈講師」。對方以「早鳥名額」邀請你加入私密社群，承諾七日內保證獲利 15%。氣氛熱絡、朋友也在場，你當晚就掃 QR Code 付款 0.1 BTC。隔日群組開始發佈「會員曬收益截圖」，刺激你追加投入；第三天，群組解散、客服消失。
+                    </div>
+                    
+                    <h3 class="scenario-subtitle"><i class="fas fa-shield-alt"></i> 預防建議</h3>
+                    <div class="character-details">
+                        <div class="character-detail">
+                            <p class="detail-content">
+                                三步查證：搜尋公司登記、金管會警示名單、第三方評價。
+                            </p>
+                        </div>
+                        <div class="character-detail">
+                            <p class="detail-content">
+                                少用即時付款：對「限時優惠」保持遲疑，改採銀行轉帳並選擇可追蹤管道。
+                            </p>
+                        </div>
+                        <div class="character-detail">
+                            <p class="detail-content">
+                                理性顧問機制：在投資前固定找一位「不跟單」的理性朋友或專業顧問核對可行性。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 核心提醒 -->
+                <div class="analysis-section">
+                    <h2 class="section-title">核心提醒</h2>
+                    <p class="analysis-text">
+                        ESDA 的「高情感共鳴＋即興決策＋冒險取向」易被「急難求助」與「高獲利、限時」話術觸發。
+                        透過 延遲決定、雙重驗證、固定審核人 三道防線，可大幅降低受騙風險，同時保留探索與互動的樂趣。
+                    </p>
+                </div>
             </div>
+
+            <footer>
+                <div class="seal"></div>
+                <p>中世紀人格分析報告 · 吟遊詩人特質</p>
+                <p>ESDA人格類型 · 暖心衝動者</p>
+                <p>此報告由智慧之塔圖書館封存於2025年</p>
+            </footer>
         </div>
     </div>
 </body>
